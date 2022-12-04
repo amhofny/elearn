@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "9d8ff04a-78a2-48ce-b6c3-913f27cddfcf",
+		"name": "elearn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/courses",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/courses/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\": \n    {\n        \"type\":\"courses\", \n        \"attributes\":{\"name\":\"test course\"},\n        \"relationships\": { \"author\": { \"data\": { \"type\": \"authors\", \"id\": \"11\" } } }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/courses",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\": \n    {\n        \"id\": \"12\",\n        \"type\":\"courses\", \n        \"attributes\":{\"name\":\"test course2\"},\n        \"relationships\": { \n            \"author\": { \"data\": { \"type\": \"authors\", \"id\": \"12\" } },\n            \"talents\": { \"data\": [{ \"type\": \"talents\", \"id\": \"42\"}]}\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/courses/12",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"courses",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{domain}}/courses/12",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"courses",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/authors?include=courses",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"authors"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "courses"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/authors/11",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"authors",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\": \n    {\n        \"type\":\"authors\", \n        \"attributes\":{\"name\":\"test author\"}\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/authors",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\": \n    {\n        \"id\": \"11\",\n        \"type\":\"authors\", \n        \"attributes\":{\"name\":\"test author\"}\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/authors/11",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"authors",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/authors/11",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"authors",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Talents",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/talents",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"talents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/talents/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"talents",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data\": {\n        \"type\": \"talents\",\n        \"attributes\": {\n            \"name\": \"test talent\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/talents",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"talents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data\": {\n        \"id\": \"42\",\n        \"type\": \"talents\",\n        \"attributes\": {\n            \"name\": \"test talent1\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/talents/42",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"talents",
+								"42"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/talents/42",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"talents",
+								"42"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({",
+					"    key: 'Content-Type', value: 'application/vnd.api+json' ",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "localhost:3000",
+			"type": "default"
+		}
+	]
+}

@@ -1,0 +1,287 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/courses/{course_id}/author":
+    parameters:
+    - name: course_id
+      in: path
+      description: course_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show_related_resource author
+      responses:
+        '200':
+          description: successful
+  "/authors/{author_id}/relationships/courses":
+    parameters:
+    - name: author_id
+      in: path
+      description: author_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show_relationship author
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create_relationship author
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update_relationship author
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: destroy_relationship author
+      responses:
+        '200':
+          description: successful
+  "/authors":
+    get:
+      summary: list authors
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create author
+      responses:
+        '200':
+          description: successful
+  "/authors/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show author
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update author
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update author
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete author
+      responses:
+        '200':
+          description: successful
+  "/courses/{course_id}/relationships/author":
+    parameters:
+    - name: course_id
+      in: path
+      description: course_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show_relationship course
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update_relationship course
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: destroy_relationship course
+      responses:
+        '200':
+          description: successful
+  "/courses/{course_id}/relationships/talents":
+    parameters:
+    - name: course_id
+      in: path
+      description: course_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show_relationship course
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create_relationship course
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update_relationship course
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: destroy_relationship course
+      responses:
+        '200':
+          description: successful
+  "/courses":
+    get:
+      summary: list courses
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create course
+      responses:
+        '200':
+          description: successful
+  "/courses/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show course
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update course
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update course
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete course
+      responses:
+        '200':
+          description: successful
+  "/authors/{author_id}/courses":
+    parameters:
+    - name: author_id
+      in: path
+      description: author_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: index_related_resources course
+      responses:
+        '200':
+          description: successful
+  "/talents/{talent_id}/courses":
+    parameters:
+    - name: talent_id
+      in: path
+      description: talent_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: index_related_resources course
+      responses:
+        '200':
+          description: successful
+  "/courses/{course_id}/talents":
+    parameters:
+    - name: course_id
+      in: path
+      description: course_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: index_related_resources talent
+      responses:
+        '200':
+          description: successful
+  "/talents/{talent_id}/relationships/courses":
+    parameters:
+    - name: talent_id
+      in: path
+      description: talent_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show_relationship talent
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create_relationship talent
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update_relationship talent
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: destroy_relationship talent
+      responses:
+        '200':
+          description: successful
+  "/talents":
+    get:
+      summary: list talents
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create talent
+      responses:
+        '200':
+          description: successful
+  "/talents/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show talent
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update talent
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update talent
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete talent
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
