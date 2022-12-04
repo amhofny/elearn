@@ -1,15 +1,16 @@
 require 'swagger_helper'
 
 RSpec.describe 'talents', type: :request do
+  let!(:talent) { create(:user, :talent) }
+  let!(:new_course) { create(:course) }
 
   path '/courses/{course_id}/talents' do
-    # You'll want to customize the parameter types...
-    parameter name: 'course_id', in: :path, type: :string, description: 'course_id'
+    parameter name: 'course_id', in: :path, type: :integer, description: 'course_id'
 
     get('index_related_resources talent') do
-      response(200, 'successful') do
-        let(:course_id) { '123' }
+      let(:course_id) { new_course.id }
 
+      response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -23,13 +24,12 @@ RSpec.describe 'talents', type: :request do
   end
 
   path '/talents/{talent_id}/relationships/courses' do
-    # You'll want to customize the parameter types...
     parameter name: 'talent_id', in: :path, type: :string, description: 'talent_id'
 
     get('show_relationship talent') do
-      response(200, 'successful') do
-        let(:talent_id) { '123' }
+      let(:talent_id) { talent.id }
 
+      response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -42,46 +42,14 @@ RSpec.describe 'talents', type: :request do
     end
 
     post('create_relationship talent') do
-      response(200, 'successful') do
-        let(:talent_id) { '123' }
+      let(:talent_id) { talent.id }
+      parameter name: :course, in: :body
+      consumes "application/vnd.api+json"
+      let(:course) {
+        { data: [{type: "courses", id: new_course.id}]}
+      }
 
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
-    patch('update_relationship talent') do
-      response(200, 'successful') do
-        let(:talent_id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
-    delete('destroy_relationship talent') do
-      response(200, 'successful') do
-        let(:talent_id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+      response(204, 'successful') do
         run_test!
       end
     end
@@ -104,15 +72,11 @@ RSpec.describe 'talents', type: :request do
     end
 
     post('create talent') do
-      response(200, 'successful') do
+      parameter name: :new_talent, in: :body, schema: { '$ref' => '#/components/schemas/new_object' }
+      consumes "application/vnd.api+json"
+      let(:new_talent) {{ data: { type: "talents", attributes: { name: "Test" } } }}
 
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+      response(201, 'successful') do
         run_test!
       end
     end
@@ -124,7 +88,7 @@ RSpec.describe 'talents', type: :request do
 
     get('show talent') do
       response(200, 'successful') do
-        let(:id) { '123' }
+        let(:id) { talent.id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -138,9 +102,12 @@ RSpec.describe 'talents', type: :request do
     end
 
     patch('update talent') do
-      response(200, 'successful') do
-        let(:id) { '123' }
+      parameter name: :tal, in: :body, schema: { '$ref' => '#/components/schemas/object' }
+      let(:id) { talent.id }
+      let(:tal) {{ data: { type: "talents",id: talent.id, attributes: { name: "Test" } } }}
+      consumes "application/vnd.api+json"
 
+      response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -153,9 +120,12 @@ RSpec.describe 'talents', type: :request do
     end
 
     put('update talent') do
-      response(200, 'successful') do
-        let(:id) { '123' }
+      parameter name: :tal, in: :body, schema: { '$ref' => '#/components/schemas/object' }
+      let(:id) { talent.id }
+      let(:tal) {{ data: { type: "talents",id: talent.id, attributes: { name: "Test" } } }}
+      consumes "application/vnd.api+json"
 
+      response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -168,16 +138,9 @@ RSpec.describe 'talents', type: :request do
     end
 
     delete('delete talent') do
-      response(200, 'successful') do
-        let(:id) { '123' }
+      let(:id) { talent.id }
 
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+      response(204, 'successful') do
         run_test!
       end
     end

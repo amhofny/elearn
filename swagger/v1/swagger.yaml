@@ -32,18 +32,9 @@ paths:
           description: successful
     post:
       summary: create_relationship author
+      parameters: []
       responses:
-        '200':
-          description: successful
-    patch:
-      summary: update_relationship author
-      responses:
-        '200':
-          description: successful
-    delete:
-      summary: destroy_relationship author
-      responses:
-        '200':
+        '204':
           description: successful
   "/authors":
     get:
@@ -53,9 +44,15 @@ paths:
           description: successful
     post:
       summary: create author
+      parameters: []
       responses:
-        '200':
+        '201':
           description: successful
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              "$ref": "#/components/schemas/new_object"
   "/authors/{id}":
     parameters:
     - name: id
@@ -71,18 +68,30 @@ paths:
           description: successful
     patch:
       summary: update author
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              "$ref": "#/components/schemas/object"
     put:
       summary: update author
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              "$ref": "#/components/schemas/object"
     delete:
       summary: delete author
       responses:
-        '200':
+        '204':
           description: successful
   "/courses/{course_id}/relationships/author":
     parameters:
@@ -99,13 +108,14 @@ paths:
           description: successful
     patch:
       summary: update_relationship course
+      parameters: []
       responses:
-        '200':
+        '204':
           description: successful
     delete:
       summary: destroy_relationship course
       responses:
-        '200':
+        '422':
           description: successful
   "/courses/{course_id}/relationships/talents":
     parameters:
@@ -122,18 +132,15 @@ paths:
           description: successful
     post:
       summary: create_relationship course
+      parameters: []
       responses:
-        '200':
-          description: successful
-    patch:
-      summary: update_relationship course
-      responses:
-        '200':
+        '204':
           description: successful
     delete:
       summary: destroy_relationship course
+      parameters: []
       responses:
-        '200':
+        '204':
           description: successful
   "/courses":
     get:
@@ -143,9 +150,15 @@ paths:
           description: successful
     post:
       summary: create course
+      parameters: []
       responses:
-        '200':
+        '201':
           description: successful
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              "$ref": "#/components/schemas/object"
   "/courses/{id}":
     parameters:
     - name: id
@@ -161,18 +174,30 @@ paths:
           description: successful
     patch:
       summary: update course
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              "$ref": "#/components/schemas/object"
     put:
       summary: update course
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              "$ref": "#/components/schemas/object"
     delete:
       summary: delete course
       responses:
-        '200':
+        '204':
           description: successful
   "/authors/{author_id}/courses":
     parameters:
@@ -207,7 +232,7 @@ paths:
       description: course_id
       required: true
       schema:
-        type: string
+        type: integer
     get:
       summary: index_related_resources talent
       responses:
@@ -228,18 +253,9 @@ paths:
           description: successful
     post:
       summary: create_relationship talent
+      parameters: []
       responses:
-        '200':
-          description: successful
-    patch:
-      summary: update_relationship talent
-      responses:
-        '200':
-          description: successful
-    delete:
-      summary: destroy_relationship talent
-      responses:
-        '200':
+        '204':
           description: successful
   "/talents":
     get:
@@ -249,9 +265,15 @@ paths:
           description: successful
     post:
       summary: create talent
+      parameters: []
       responses:
-        '200':
+        '201':
           description: successful
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              "$ref": "#/components/schemas/new_object"
   "/talents/{id}":
     parameters:
     - name: id
@@ -267,21 +289,68 @@ paths:
           description: successful
     patch:
       summary: update talent
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              "$ref": "#/components/schemas/object"
     put:
       summary: update talent
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              "$ref": "#/components/schemas/object"
     delete:
       summary: delete talent
       responses:
-        '200':
+        '204':
           description: successful
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
       default: localhost:3000
+components:
+  schemas:
+    object:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+            id:
+              type: integer
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+      required:
+      - id
+      - name
+    new_object:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+            attributes:
+              type: object
+              properties:
+                name:
+                  type: string
+      required:
+      - name

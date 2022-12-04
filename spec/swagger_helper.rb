@@ -31,7 +31,48 @@ RSpec.configure do |config|
             }
           }
         }
-      ]
+      ],
+      components: {
+        schemas: {
+          object: {
+            type: 'object',
+            properties: {
+              data: {
+                type: 'object',
+                properties: {
+                  type: { type: "string" },
+                  id: { type: "integer" },
+                  attributes: {
+                    type: 'object',
+                    properties: {
+                      name: { type: 'string' }
+                    }
+                  }
+                }
+              },
+            },
+            required: %w[id name]
+          },
+          new_object: {
+            type: 'object',
+            properties: {
+              data: {
+                type: 'object',
+                properties: {
+                  type: { type: "string" },
+                  attributes: {
+                    type: 'object',
+                    properties: {
+                      name: { type: 'string' }
+                    }
+                  }
+                }
+              },
+            },
+            required: %w[name]
+          }
+        }
+      }
     }
   }
 
